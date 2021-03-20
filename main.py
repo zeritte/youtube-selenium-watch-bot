@@ -17,6 +17,7 @@ video_list = [
     "https://www.youtube.com/watch?v=KcCRMe7D5NY",
     "https://www.youtube.com/watch?v=_vO6ed5s6ik",
 ]
+video_list.reverse()
 
 
 def main():
@@ -26,15 +27,15 @@ def main():
         options.add_argument("--headless")
         options.add_argument("--mute-audio")
 
-        driver = webdriver.Chrome(options=options)
-
         player_button_css_selector = (
             "#movie_player > div.ytp-cued-thumbnail-overlay > button"
         )
 
         for i in range(0, 100):
-            for i in range(0, len(video_list)):
-                driver.get(video_list[i])
+            print("=========", i, "th time watching ========")
+            for video in video_list:
+                driver = webdriver.Chrome(options=options)
+                driver.get(video)
                 print("opened the page", driver.title)
 
                 WebDriverWait(driver, 20).until(
@@ -44,29 +45,31 @@ def main():
                 )
                 print("found video container")
 
-                if i == 0:
-                    WebDriverWait(driver, 20).until(
-                        EC.presence_of_element_located(
-                            (
-                                By.CSS_SELECTOR,
-                                player_button_css_selector,
-                            )
+                WebDriverWait(driver, 20).until(
+                    EC.presence_of_element_located(
+                        (
+                            By.CSS_SELECTOR,
+                            player_button_css_selector,
                         )
                     )
-                    print("found play button")
+                )
+                print("found play button")
 
-                    player_button = driver.find_elements_by_css_selector(
-                        player_button_css_selector
-                    )
-                    player_button = player_button[0]
-                    print("got player button")
+                player_button = driver.find_elements_by_css_selector(
+                    player_button_css_selector
+                )
+                player_button = player_button[0]
+                print("got player button")
 
-                    player_button.click()
-                    print("clicked player button")
-                else:
-                    print("video auto played")
+                player_button.click()
+                print("clicked player button")
 
                 time.sleep(10)
+                print("waiting 15 seconds")
+
+                driver.delete_all_cookies()
+                driver.close()
+                print("close the driver")
 
     except Exception as e:
         print(e)
