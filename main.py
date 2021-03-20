@@ -23,8 +23,8 @@ def main():
     try:
         options = webdriver.ChromeOptions()
         options.add_argument("--incognito")
-        # options.add_argument("--headless")
-        # options.add_argument("--mute-audio")
+        options.add_argument("--headless")
+        options.add_argument("--mute-audio")
 
         driver = webdriver.Chrome(options=options)
 
