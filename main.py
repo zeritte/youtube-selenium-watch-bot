@@ -64,7 +64,7 @@ def main():
                 player_button.click()
                 print("clicked player button")
 
-                time.sleep(10)
+                time.sleep(15)
                 print("waiting 15 seconds")
 
                 driver.delete_all_cookies()
