@@ -21,19 +21,19 @@ video_list.reverse()
 
 
 def main():
-    try:
-        options = webdriver.ChromeOptions()
-        options.add_argument("--incognito")
-        options.add_argument("--headless")
-        options.add_argument("--mute-audio")
+    options = webdriver.ChromeOptions()
+    options.add_argument("--incognito")
+    options.add_argument("--headless")
+    options.add_argument("--mute-audio")
 
-        player_button_css_selector = (
-            "#movie_player > div.ytp-cued-thumbnail-overlay > button"
-        )
+    player_button_css_selector = (
+        "#movie_player > div.ytp-cued-thumbnail-overlay > button"
+    )
 
-        for i in range(0, 100):
-            print("=========", i, "th time watching ========")
-            for video in video_list:
+    for i in range(0, 100000):
+        print("=========", i, "th time watching ========")
+        for video in video_list:
+            try:
                 driver = webdriver.Chrome(options=options)
                 driver.get(video)
                 print("opened the page", driver.title)
@@ -64,16 +64,15 @@ def main():
                 player_button.click()
                 print("clicked player button")
 
-                time.sleep(15)
-                print("waiting 15 seconds")
+                time.sleep(10)
+                print("waiting 10 seconds")
 
                 driver.delete_all_cookies()
                 driver.close()
                 print("close the driver")
-
-    except Exception as e:
-        print(e)
-        driver.close()
+            except Exception as e:
+                print(e)
+                driver.close()
 
 
 main()
