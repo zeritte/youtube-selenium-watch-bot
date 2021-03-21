@@ -69,7 +69,7 @@ def main():
 
                 driver.delete_all_cookies()
                 driver.close()
-                print("close the driver")
+                print("close the page")
             except Exception as e:
                 print(e)
                 driver.close()
