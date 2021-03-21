@@ -9,4 +9,5 @@ This bot opens the youtube page, finds the play button. Plays the video for 10 s
 1. Clone the repository.
 2. Create a virtual environment. (`python3 -m venv venv`)
 3. Activate it. (`source venv/bin/activate`)
-4. Run the code. (`python3 main.py`)
+4. Install dependencies. (`pip3 install -r requirements.txt`)
+5. Run the code. (`python3 main.py`)
